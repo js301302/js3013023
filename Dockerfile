@@ -1,11 +1,7 @@
-FROM node:argon
-
-RUN mkdir -p /usr/local/helloworld/ 
-COPY helloworld.js package.json /usr/local/helloworld/ 
-
-WORKDIR /usr/local/helloworld/ 
-
-RUN npm install --production 
-
-EXPOSE 3000 
-ENTRYPOINT [ "node", "helloworld.js" ]
+## Contents Cloner Image
+FROM ubuntu:16.04
+RUN apt-get update && apt-get install -y git
+COPY ./contents-cloner /contents-cloner
+RUN chmod a+x /contents-cloner
+WORKDIR /
+CMD ["/contents-cloner"]
